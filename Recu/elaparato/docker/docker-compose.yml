@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0  
+    container_name: mysql8
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'elaparato'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'pwd-user'
+      MYSQL_ROOT_PASSWORD: 'toor'
+    ports:
+      - '3366:3306'
+    expose:
+      - '3306'
+
+
+
+
+

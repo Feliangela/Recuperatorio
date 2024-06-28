@@ -1,0 +1,36 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: elaparato
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+          issuer-uri: http://localhost:8080/realms/el-aparato-garciaf
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  datasource:
+    username: user
+    password: pwd-user
+    initialization-mode: always
+    url: jdbc:mysql://localhost:3366/elaparato?serverTimezone=UTC
+    driverClassName: com.mysql.cj.jdbc.Driver
+jwt:
+  auth:
+    converter:
+      principal-attribute: preferred_username
+      resource-id: api-gateway-client
+
+dh:
+  keycloak:
+    realm: el-aparato-garciaf
+    clientId: users-client
+    clientSecret: MJ0b8nbQter2gFTuROrXsm6S95Kpkafr
+    serverUrl: http://localhost:8080

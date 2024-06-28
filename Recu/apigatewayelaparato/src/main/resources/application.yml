@@ -1,0 +1,27 @@
+server:
+  port: 9090
+
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          api-gateway-service:
+            issuer-uri: http://localhost:8080/realms/el-aparato-garciaf
+        registration:
+          api-gateway-service:
+            client-id: api-gateway-client
+            client-secret: B2URJSowDK3m0rHqhMsjiW4QQK5JSCNh
+            scope: openid
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:9090/login/oauth2/code/keycloak
+
+  cloud:
+    gateway:
+      default-filters:
+        - TokenRelay
+      routes:
+        - id: elaparato-service
+          predicates:
+            - Path=/**
+          uri: http://localhost:8081
